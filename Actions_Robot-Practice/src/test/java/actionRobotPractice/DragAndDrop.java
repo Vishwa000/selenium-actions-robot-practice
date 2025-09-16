@@ -1,6 +1,12 @@
 package actionRobotPractice;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,7 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 
 public class DragAndDrop {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, InterruptedException {
 
 		System.setProperty("webdriver.chrome.driver",
 				"C:\\Users\\ASUS\\git\\selenium-actions-robot-practice\\Actions_Robot-Practice\\target\\chromedriver.exe");
@@ -26,6 +32,13 @@ public class DragAndDrop {
 		WebElement dragAmount = driver.findElement(By.xpath("(//li[@class='placeholder'])[2]"));
 
 		mouseOver.dragAndDrop(dragFiveK, dragAmount).perform();
+		Thread.sleep(2000);
+
+		TakesScreenshot result = (TakesScreenshot) driver;
+		File img = result.getScreenshotAs(OutputType.FILE);
+		File store = new File(
+				"C:\\Users\\ASUS\\git\\selenium-actions-robot-practice\\Actions_Robot-Practice\\target\\dragImg.png");
+		FileUtils.copyFile(img, store);
 
 	}
 
